@@ -1,0 +1,4 @@
+package br.com.exemplo.aula.controllers;
+
+public class ConsultaControllerTestH2 {
+}

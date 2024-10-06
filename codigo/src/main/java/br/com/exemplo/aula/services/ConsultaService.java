@@ -74,4 +74,14 @@ public class ConsultaService {
     }
 
 
+
+    public void deletarConsulta(Long id) {
+        if (!consultaRepository.existsById(id)) {
+            throw new RuntimeException("Consulta não encontrada"); // Lança exceção se a consulta não existir
+        }
+        consultaRepository.deleteById(id); // Exclui a consulta se existir
+    }
+
+
+
 }
