@@ -12,6 +12,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,9 +28,39 @@ class PacienteServiceTest {
     @Mock
     private PacienteRepository pacienteRepository;
 
+    private Paciente pacienteMock; // Paciente mockado
+
     @BeforeEach
     void setUp() {
-        // Não é mais necessário chamar o openMocks, pois @ExtendWith cuida disso
+        // Inicializando o paciente mockado
+        pacienteMock = new Paciente();
+        pacienteMock.setId(1L);
+        pacienteMock.setNome("João Silva");
+        pacienteMock.setDataNascimento(LocalDate.of(1990, 5, 10));
+        pacienteMock.setCpf("12345678910");
+        pacienteMock.setTelefone("999999999");
+        pacienteMock.setEmail("joao.silva@email.com");
+    }
+
+    @Test
+    void listarPacientes() {
+        // Mockar a lista de pacientes a ser retornada
+        List<Paciente> pacientesMockados = new ArrayList<>();
+        pacientesMockados.add(pacienteMock);
+
+        // Simula o comportamento do método findAll do repositório
+        when(pacienteRepository.findAll()).thenReturn(pacientesMockados);
+
+        // Chama o método de listarPacientes do serviço
+        List<PacienteResponseDTO> resultado = pacienteService.listarPacientes();
+
+        // Verifica se o resultado não é nulo e contém o paciente mockado
+        assertNotNull(resultado);
+        assertEquals(1, resultado.size()); // Verifica se a lista contém um único paciente
+        assertEquals(pacientesMockados.get(0).getId(), resultado.get(0).getId());
+
+        // Verifica se o método findAll do repositório foi chamado uma vez
+        verify(pacienteRepository, times(1)).findAll();
     }
 
     @Test
