@@ -5,6 +5,7 @@ import br.com.exemplo.aula.repositories.PacienteRepository;
 import br.com.exemplo.aula.controllers.dto.PacienteRequestDTO;
 import br.com.exemplo.aula.controllers.dto.PacienteResponseDTO;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -43,6 +44,7 @@ class PacienteServiceTest {
     }
 
     @Test
+    @DisplayName("Deve listar todos os pacientes corretamente")
     void listarPacientes() {
         // Mockar a lista de pacientes a ser retornada
         List<Paciente> pacientesMockados = new ArrayList<>();
@@ -64,6 +66,7 @@ class PacienteServiceTest {
     }
 
     @Test
+    @DisplayName("Deve salvar um novo paciente com sucesso")
     void testSalvarPaciente() {
         // Arrange: Preparar o cenário do teste
         PacienteRequestDTO requestDTO = new PacienteRequestDTO();
@@ -95,6 +98,7 @@ class PacienteServiceTest {
     }
 
     @Test
+    @DisplayName("Deve buscar um paciente por ID com sucesso")
     void testBuscarPaciente() {
         // Arrange: Preparar um paciente de exemplo
         Paciente paciente = new Paciente();
@@ -119,6 +123,7 @@ class PacienteServiceTest {
     }
 
     @Test
+    @DisplayName("Deve remover um paciente por ID")
     void testRemoverPaciente() {
         // Act: Executar o método removerPaciente
         pacienteService.removerPaciente(1L);
@@ -128,6 +133,7 @@ class PacienteServiceTest {
     }
 
     @Test
+    @DisplayName("Deve atualizar as informações de um paciente existente")
     void testAtualizarPaciente() {
         // Arrange: Preparar um paciente e um requestDTO
         Paciente pacienteExistente = new Paciente();
